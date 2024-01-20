@@ -1,6 +1,6 @@
 SRC : 
 
-name: CI
+name: REX01
 
 
 on: [push, workflow_dispatch]
