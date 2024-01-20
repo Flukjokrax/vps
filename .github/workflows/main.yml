@@ -30,9 +30,10 @@ jobs:
 
       env:2bCrNJtai5Q6NOqxr11Xps8ZLm0_7rk4hSx75T7sYEtMp2eCs
 
-        NGROK_AUTH_TOKEN: # in ngrok.yml
-authtoken: 2bCrNJtai5Q6NOqxr11Xps8ZLm0_7rk4hSx75T7sYEtMp2eCs
-    - name: Enable TS
+    NGROK_AUTH_TOKEN: # in ngrok.yml
+    authtoken: 2bCrNJtai5Q6NOqxr11Xps8ZLm0_7rk4hSx75T7sYEtMp2eCs
+    
+    - name: Enable REX01
 
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
 
