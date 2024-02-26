@@ -1,48 +1,25 @@
-SRC : 
-
-name: REX01
-
-
-on: [push, workflow_dispatch]
-
-
+name: ci
+on:
+  push:
+  workflow_dispatch:
+  
 jobs:
-
-  build: cr_2bCrNJtai5Q6NOqxr11Xps8ZLm0
-
-
+  build:
     runs-on: windows-latest
-
-
     steps:
-
-    - name: Download
-
-      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/... -OutFile ngrok.zip
-
-    - name: Extract
-
+    - name: Download ngrok
+      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: Extract ngrok
       run: Expand-Archive ngrok.zip
-
-    - name: Auth
-
+    - name: Authenticate with ngrok
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-
-      env:2bCrNJtai5Q6NOqxr11Xps8ZLm0_7rk4hSx75T7sYEtMp2eCs
-
-    NGROK_AUTH_TOKEN: # in ngrok.yml
-    authtoken: 2bCrNJtai5Q6NOqxr11Xps8ZLm0_7rk4hSx75T7sYEtMp2eCs
-    
-    - name: Enable REX01
-
-      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
-
-    - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-
-    - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-
-    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-
-    - name: Create Tunnel
-
-      run: .\ngrok\ngrok.exe tcp 80
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Enable Remote Desktop
+      run: |
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+    - name: Create ngrok tunnel to remote desktop
+      run: .\ngrok\ngrok.exe tcp 3389
