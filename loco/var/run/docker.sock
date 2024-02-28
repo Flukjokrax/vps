@@ -1,0 +1,18 @@
+ docker context inspect default
+[
+    {
+        "Name": "fluk2409",
+        "Metadata": {},
+        "Endpoints": {
+            "docker": {
+                "Host": "docker push fluk2409/curl:tagname",
+                "SkipTLSVerify": false
+            }
+        },
+        "TLSMaterial": {},
+        "Storage": {
+            "MetadataPath": "\u003cIN MEMORY\u003e",
+            "TLSPath": "\u003cIN MEMORY\u003e"
+        }
+    }
+]
