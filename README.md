@@ -4,10 +4,15 @@
 สร้าง file = .github/workflows/main.yml
 
 
+
 #######################################################
 -----------------------------------------------------
+{}ไม่เกี่ยว
+COPPY : name: ci =    run: .\ngrok\ngrok.exe tcp 3389
 
-{ name: CI
+{ coppy -----
+
+name: CI
 
 on: [push, workflow_dispatch]
 
