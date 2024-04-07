@@ -1,4 +1,4 @@
-# VPS JOKREX 
+# VPS FLUKJOKREX
 <h1>การใช้งานเครื่องเหมือน GITHUB </h1>
 #GITHUB สร้างที่เก็บข้อมูล ตั้งชื่อ ....
 สร้าง file = .github/workflows/main.yml
